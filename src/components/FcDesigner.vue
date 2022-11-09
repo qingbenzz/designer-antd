@@ -674,14 +674,17 @@ export default defineComponent({
                         data.propsForm.api[data.activeRule._id] = data.activeRule;
                         data.baseForm.api[data.activeRule._id] = data.activeRule;
                         data.validateForm.api[data.activeRule._id] = data.activeRule;
-
+                        
                         data.baseForm.api.setValue({info:data.activeRule.info});
                         data.baseForm.api.setValue({field:data.activeRule.field});
                         data.baseForm.api.setValue({title:data.activeRule.title});
+
+                        data.propsForm.api.setValue(formData);
                     });
                 });
 
                 if (!data.cacheProps[rule._id]) {
+                    
                     data.cacheProps[rule._id] = rule.config.config.props(rule);
                 }
 
@@ -697,7 +700,8 @@ export default defineComponent({
                         formData['formCreate' + upper(name) + '>' + k] = rule[name][k];
                     });
                 });
-                data.propsForm.options.formData = formData;
+                //data.propsForm.options.formData = formData;
+                //data.propsForm.api.setValue(formData);
 
                 data.showBaseRule = hasProperty(rule, 'field') && rule.input !== false && (!config.value || config.value.showBaseForm !== false);
 
